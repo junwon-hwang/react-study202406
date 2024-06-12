@@ -1,6 +1,7 @@
 import "./App.css";
 import React from "react";
-import ExpenseItem from "./components/Expenses/ExpenseItem";
+import ExpenseList from "./components/Expenses/ExpenseList";
+import Greet from "./components/Greet";
 
 const App = () => {
 
@@ -23,29 +24,12 @@ const App = () => {
       },
     ];
 
-  // 속성 보낼때 {} 넣어야함 문자열은 생략가능
+ 
   return (
+      <>
+        <ExpenseList expenses={expenses}/>
+      </>
 
-    <>
-      <ExpenseItem
-        title={expenses[0].title}
-        price={expenses[0].price}
-        date={expenses[0].date}
-        // abc={[1,2,3]} 배열
-        // abc={{a:1,a:2,a:3}} 객체
-        // abc={()=>{}} 함수 
-      />
-      <ExpenseItem 
-        title={expenses[1].title}
-        price={expenses[1].price}
-        date={expenses[1].date}
-      />
-      <ExpenseItem
-        title={expenses[2].title}
-        price={expenses[2].price}
-        date={expenses[2].date}
-      />
-    </>
   );
 };
 

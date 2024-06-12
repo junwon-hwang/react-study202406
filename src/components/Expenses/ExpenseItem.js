@@ -31,6 +31,17 @@ const ExpenseItem = ({ title, date, price: exPrice }) => {
   // 원화 표기법으로 변환
   const formattedPrice = new Intl.NumberFormat("ko-KR").format(exPrice);
 
+  // 이벤트 핸들러 선언
+  const clickHandler = e =>{
+    console.log('클릭함!');
+    console.log(e.target.previousElementSibling.firstElementChild.textContent);
+    
+    // const $price = document.querySelectorAll('.expense-item__price');
+    // console.log(this);
+  };
+
+
+
   return (
  
       <Card className="expense-item">
@@ -39,6 +50,9 @@ const ExpenseItem = ({ title, date, price: exPrice }) => {
           <h2>{title}</h2>
           <div className="expense-item__price">{formattedPrice}원</div>
         </div>
+
+        <button id='btn' onClick={clickHandler}>버튼</button>
+        <button id='btn2' onMouseOver={e=> alert('하하!')}>버튼2</button>
       </Card>
   
   );

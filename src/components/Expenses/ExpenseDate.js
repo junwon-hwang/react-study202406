@@ -3,7 +3,7 @@ import './ExpenseDate.css';
 
 const ExpenseDate = ({exDate}) => {
 
-  console.log(exDate);
+  // console.log(exDate);
 
   return (
     <div className="expense-date">

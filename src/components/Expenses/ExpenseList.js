@@ -27,4 +27,4 @@ const ExpenseList = ({expenses}) => {
   )
 }
 
-export default ExpenseList
+export default ExpenseList 

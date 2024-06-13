@@ -1,10 +1,18 @@
 import React from 'react'
 import ExpenseItem from './ExpenseItem'
+import ExpenseFilter from './ExpenseFilter'
 
  // 속성 보낼때 {} 넣어야함 문자열은 생략가능
 const ExpenseList = ({expenses}) => {
+
+  const onFilterChange = (selectYear) =>{
+    // ExpenseFilter에 있는 선택된 연도값을 여기서 출력
+    console.log(selectYear);
+  };
+
   return (
     <div className='expenses'>
+      <ExpenseFilter onfindYear ={onFilterChange} />
       <ExpenseItem
         title={expenses[0].title}
         price={expenses[0].price}

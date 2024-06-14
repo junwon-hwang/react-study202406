@@ -4,7 +4,7 @@ import CourseItem from './CourseItem';
 
 const CourseList = ({items}) => {
 
-  console.log(items);
+
 
   return (
     <ul className='goal-list'>

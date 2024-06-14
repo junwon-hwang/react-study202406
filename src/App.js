@@ -18,15 +18,22 @@ const DUMMY_DATA = [
 
 
 
+
+
+
 const App = () => {
   
   const [goals,setGoals] = useState(DUMMY_DATA);
-  
+
+  const addGoalHandler = (goalobject) =>{
+    setGoals([...goals,goalobject])
+  }
+
   
   return (
     <div>
       <section id="goal-form">
-        <CourseInput />
+        <CourseInput onAdd={addGoalHandler}/>
       </section>
       <section id="goals">
         <CourseList items={goals}/>

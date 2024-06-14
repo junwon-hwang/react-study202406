@@ -30,7 +30,7 @@ const ExpenseList = ({ expenses }) => {
   // return newArray;
   // };
 
-  //연돟로 필터링한 배열
+  //연도로 필터링한 배열
   const filteredExpenses = expenses.filter(
     (ex) => ex.date.getFullYear().toString() === selectYear
   );
@@ -53,7 +53,7 @@ const ExpenseList = ({ expenses }) => {
   return (
     <div className="expenses">
       <ExpenseFilter onfindYear={onFilterChange} />
-      <ExpenseChart />
+      <ExpenseChart expenses={filteredExpenses}  />
       {Content}
     </div>
   );

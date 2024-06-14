@@ -7,7 +7,7 @@ const ExpenseList = ({expenses}) => {
 
   // 선택된 연도로 재 렌더링하기 위해 연도를 상태값으로 관리
   const [selectYear, setSelectYear] 
-  = useState(new Date().getFullYear());
+  = useState(new Date().getFullYear().toString());
 
 
   const onFilterChange = (selectYear) =>{

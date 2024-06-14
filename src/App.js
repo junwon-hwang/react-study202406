@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React ,{useState}from "react";
 import ExpenseList from "./components/Expenses/ExpenseList";
 import NewExpense from "./components/new-expense/NewExpense";
 
@@ -35,23 +35,20 @@ const App = () => {
       },
     ];
 
+// 배열을 상태변수로 관리
+const [expenseList, setExpenseList] = useState(expenses); 
 
-    // ExpenseForm에게 내려보낼 함수 
-    
-    const onAddExpense = (userInput) => {
-      console.log('App.js가 내려보낸 함수 호출');
 
-      expenses.push(userInput);
-    };
+// ExpenseForm에게 내려보낼 함수
+const onAddExpense = (userInput) => setExpenseList([...expenseList,userInput]);
 
- 
-  return (
-      <>
-        <NewExpense onSave={onAddExpense} />
-        <ExpenseList expenses={expenses}/>
-      </>
-
-  );
+return (
+  <>
+    <NewExpense onSave={onAddExpense} />
+    <ExpenseList expenses={expenseList} />
+  </>
+);
 };
+
 
 export default App;

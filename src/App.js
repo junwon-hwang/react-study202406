@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState , useRef } from 'react';
 import UserList from './components/Users/UserList'
 import AddUsers from './components/Users/AddUsers';
-import ErrorModal from './components/UI/Modal/ErrorModal';
 import './App.css';
 
 
@@ -9,10 +8,18 @@ import './App.css';
 
 const App = () => {
 
+
+
   // 회원들이 저장될 배열
   const [userList, setUserList] = useState([]);
 
+  const count = useRef(1);
+  console.log('count: ', count);
+
   const addUserHandler = user => {
+    count.current++;
+    console.log('count.current: ', count.current);
+
     console.log(user);
     setUserList(prev => [...prev, {...user, id: Math.random().toString()}]);
   };

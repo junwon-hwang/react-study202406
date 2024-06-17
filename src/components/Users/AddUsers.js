@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useRef } from 'react';
 import styles from './AddUsers.module.css';
 import Card from '../UI/Card';
 import Button from '../UI/Button';
@@ -11,29 +11,37 @@ const AddUsers = ({ onAddUser }) => {
   const [error, setError] = useState(null);
 
 
+  // useRef 로 DOM조작하기
+  const userNameRef = useRef();
+  const ageRef = useRef();
 
-  const [userValue, setUserValue] = useState({
-    username: '',
-    age: '',
-  });
+  // const [userValue, setUserValue] = useState({
+  //   username: '',
+  //   age: '',
+  // });
 
-  const usernameChangeHandler = (e) => {
-    setUserValue((prevUserValue) => ({
-      ...prevUserValue,
-      username: e.target.value,
-    }));
-  };
+  // const usernameChangeHandler = (e) => {
+  //   setUserValue((prevUserValue) => ({
+  //     ...prevUserValue,
+  //     username: e.target.value,
+  //   }));
+  // };
 
-  const ageChangeHandler = (e) => {
-    setUserValue((prevUserValue) => ({
-      ...prevUserValue,
-      age: e.target.value,
-    }));
-  };
+  // const ageChangeHandler = (e) => {
+  //   setUserValue((prevUserValue) => ({
+  //     ...prevUserValue,
+  //     age: e.target.value,
+  //   }));
+  // };
 
   const userSubmitHandler = (e) => {
+    
     e.preventDefault();
 
+    const userValue= {
+      username :  userNameRef.current.value,
+      age: ageRef.current.value
+    }
     // 입력값 검증
     if (userValue.username.trim() === '' || userValue.age.trim() === '') {
       setError({
@@ -53,10 +61,17 @@ const AddUsers = ({ onAddUser }) => {
 
     onAddUser(userValue);
 
-    setUserValue({
-      username: '',
-      age: '',
-    });
+    // setUserValue({
+    //   username: '',
+    //   age: '',
+    // });
+
+      userNameRef.current.value='';
+      ageRef.current.value='';
+
+      // document.getElementById('username').value='';
+      // document.getElementById('age').value='';
+
   };
 
   // 하위 컴포넌트 ErrorModal에게 모달을 닫는 조건을 수행하는 함수 전달
@@ -73,15 +88,17 @@ const AddUsers = ({ onAddUser }) => {
           <input
             id="username"
             type="text"
-            onChange={usernameChangeHandler}
-            value={userValue.username}
+            ref={userNameRef}
+           // onChange={usernameChangeHandler}
+           // value={userValue.username}
           />
           <label htmlFor="age">나이</label>
           <input
             id="age"
             type="number"
-            onChange={ageChangeHandler}
-            value={userValue.age}
+            ref={ageRef}
+           // onChange={ageChangeHandler}
+           // value={userValue.age}
           />
           <Button type="submit">가입하기</Button>
         </form>

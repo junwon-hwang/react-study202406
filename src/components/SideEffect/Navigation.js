@@ -1,9 +1,8 @@
-import React from 'react';
-import styles from './Navigation.module.css';
-import AuthContext from '../../store/auth-context';
+import React, { useContext } from "react";
+import styles from "./Navigation.module.css";
+import AuthContext from "../../store/auth-context";
 
 const Navigation = () => {
-
   const loginPage = (onLogout) => (
     <>
       <li>
@@ -18,21 +17,18 @@ const Navigation = () => {
     </>
   );
 
-  const anonymousPage = <li><button>Sign Up</button></li>
+  const anonymousPage = (
+    <li>
+      <button>Sign Up</button>
+    </li>
+  );
+
+  const { isLoggedIn, onLogout } = useContext(AuthContext);
 
   return (
-    <AuthContext.Consumer>
-      {({ isLoggedIn, onLogout }) => {
-        // console.log(context);
-        return (
-          <nav className={styles.nav}>
-            <ul>
-              {isLoggedIn ? loginPage(onLogout) : anonymousPage}
-            </ul>
-          </nav>
-        );
-      }}
-    </AuthContext.Consumer>
+    <nav className={styles.nav}>
+      <ul>{isLoggedIn ? loginPage(onLogout) : anonymousPage}</ul>
+    </nav>
   );
 };
 

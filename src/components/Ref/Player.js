@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useState , useRef} from "react";
 
 const Player = () => {
+
+  const $nameInput = useRef();
+  
+  const [enteredName, setEnteredName] = useState('anonymous');
+
+  const nameChangehandler = () =>{
+    setEnteredName($nameInput.current.value);
+    $nameInput.current.value = '';
+  }
+
   return (
     <section id="player">
-      <h2>Welcome anonymous!</h2>
+      <h2>Welcome {enteredName}!</h2>
       <p>
-        <input type="text"/>
-        <button>Set Name</button>
+        <input ref={$nameInput} type="text"/>
+        <button onClick={nameChangehandler}>Set Name</button>
       </p>
     </section>
   );

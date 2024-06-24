@@ -3,8 +3,8 @@ import CartContext from './cart-context';
 
 // 중앙관리 상태값 (state)
 const defaultState = {
-  items: [], // 장바구니 배열
-  totalPrice: 0 , // 총액 상태값
+  items: [], // 장바구니 배열 상태값
+  totalPrice: 0, // 총액 상태값
 };
 
 // reducer: 여러가지 복잡한 상태관리를 단순화시키며 중앙집중화한다.
@@ -17,16 +17,34 @@ const cartReducer = (state, action) => {
   console.log('업데이트 이전 상태: ', state);
 
   if (action.type === 'ADD') { // 장바구니 추가
+
     // 상태 업데이트 코드
     // 장바구니 배열 상태 업데이트
-    const updateCartItems = [...state.items, action.value];
+
+    // 장바구니에 추가될 신규 아이템
+    const newCartItem = action.value;
+
+    // 기존에 등록된 메뉴인지 확인해보기 위해 해당 아이템의 인덱스를 탐색
+    const index = state.items.findIndex(item => item.id === newCartItem.id);
+
+    // 기존에 존재하는 아이템배열 사본
+    const existingItems = [...state.items];
+
+    // 신규 아이템인 경우
+    let updatedItems;
+    if (index === -1) {
+      updatedItems = [...existingItems, newCartItem];
+    } else { // 이미 장바구니에 있었던 상품의 추가 : 수량만 업데이트
+      existingItems[index].amount += newCartItem.amount;
+      updatedItems = [...existingItems];
+    }
 
     // 총액 상태 업데이트
-    const updatePrice = state.totalPrice +  ( action.value.price * action.value.amount);
+    const updatePrice = state.totalPrice + (action.value.price * action.value.amount);
 
     return {
-      items: updateCartItems,
-      totalPrice : updatePrice
+      items: updatedItems,
+      totalPrice: updatePrice
     }; // 새로운 상태
   } else if (action.type === 'REMOVE') { // 장바구니 제거
     return null; // 새로운 상태
@@ -57,7 +75,7 @@ const CartProvider = ({ children }) => {
   // Provider가 실제로 관리할 상태들의 구체적인 내용들
   const cartContext = {
     cartItems: cartState.items, // 상태값
-    totalPrice : cartState.totalPrice, // 총가격
+    totalPrice: cartState.totalPrice, // 총액 상태값
     addItem: addItemHandler, // 상태를 업데이트하는 함수
     removeItem: id => {}, // 상태를 업데이트하는 함수
   };

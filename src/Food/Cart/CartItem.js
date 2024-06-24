@@ -2,12 +2,15 @@ import React, { useContext } from 'react';
 
 import styles from './CartItem.module.scss';
 import CartContext from '../../store/cart-context';
+import CartProvider from '../../store/CartProvider';
+
 
 const CartItem = ({ cart }) => {
 
-  const {addItem} = useContext(CartContext);
+  const {addItem , removeItem } = useContext(CartContext);
 
-  const { name, price, amount } = cart;
+
+  const { name, price, amount , id } = cart;
 
   const {
     'cart-item': cartItem,
@@ -28,6 +31,12 @@ const CartItem = ({ cart }) => {
     addItem(item);
   }
 
+  const cartRemoveHandler = e =>{
+
+    removeItem(id);
+  }
+
+
   return (
     <li className={cartItem}>
       <div>
@@ -38,7 +47,7 @@ const CartItem = ({ cart }) => {
         </div>
       </div>
       <div className={actions}>
-        <button>−</button>
+        <button onClick={cartRemoveHandler}>−</button>
         <button onClick={cartAddHandler}>+</button>
       </div>
     </li>

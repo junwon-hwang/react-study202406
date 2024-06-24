@@ -1,11 +1,16 @@
-import React from 'react';
+import React , {useReducer} from 'react';
 import styles from './Header.module.scss';
+
 
 // 정적 이미지 로딩
 import foodImage from '../../../src/assets/img/meals.jpg'
 import HeaderCartButton from './HeaderCartButton';
 
+
+
 const Header = ({ onShowCart }) => {
+
+
 
   const { header, 'main-image': mainImage } = styles;
 

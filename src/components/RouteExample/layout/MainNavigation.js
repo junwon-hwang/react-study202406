@@ -18,10 +18,10 @@ const Mainnavigation = () => {
       <nav>
         <ul className={styles.list}>
           <li>
-            <NavLink to='/' className={activeFn}>Home</NavLink>
+            <NavLink to='' className={activeFn} end>Home</NavLink>
           </li>
           <li>
-            <NavLink to='/product' className={activeFn}>Products</NavLink>
+            <NavLink to='products' className={activeFn}>Products</NavLink>
           </li>
         </ul>
       </nav>

@@ -1,29 +1,21 @@
 import React, { useState } from 'react';
-import Header from './Food/Layout/Header';
-import Meals from './Food/Meals/Meals';
-import Cart from './Food/Cart/Cart';
-import CartProvider from './store/CartProvider';
+import Home from './components/RouteExample/pages/Home';
+import Products from './components/RouteExample/pages/Products';
+import { createBrowserRouter , RouterProvider } from 'react-router-dom';
 
-const App = () => {
 
-  // 장바구니 모달을 열고 닫는 상태변수
-  const [cartIsShown, setCartIsShown] = useState(false);
+// 라우터 설정
+const router =createBrowserRouter([
+  {path: '/' , element: <Home />},
+  {path: '/products' , element: <Products />}
+]);
 
-  // 모달을 열어주는 핸들러
-  const showCartHandler = () => setCartIsShown(true);
-
-  // 모달을 닫아주는 핸들러
-  const hideCartHandler = () => setCartIsShown(false);
+const App = () =>{
 
   return (
-    <CartProvider>
-      {cartIsShown && <Cart onClose={hideCartHandler} />}
-      <Header onShowCart={showCartHandler} />
-      <div id="main">
-        <Meals />
-      </div>
-    </CartProvider>
+    <RouterProvider router={router}/>
   );
+
 };
 
 export default App;

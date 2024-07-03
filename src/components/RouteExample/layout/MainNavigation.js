@@ -21,7 +21,7 @@ const Mainnavigation = () => {
             <NavLink to='' className={activeFn} end>Home</NavLink>
           </li>
           <li>
-            <NavLink to='products' className={activeFn}>Products</NavLink>
+            <NavLink to='events' className={activeFn}>Events</NavLink>
           </li>
         </ul>
       </nav>

@@ -11,6 +11,7 @@ const Products = () => {
 
   console.log('products!');
 
+
   return (
     <>
       <h1>My Products Page</h1>

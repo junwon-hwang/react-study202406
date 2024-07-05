@@ -29,11 +29,16 @@ const Events = () => {
     setLoading(true);
 
     const response = await fetch(`http://localhost:8282/events/page/${currentPage}?sort=date`);
-    const events = await response.json();
+    const loadedEvents = await response.json();
 
-    setEvents(events);
-    console.log('end loading...')
+    const updatedEvents = [...events, ...loadedEvents ];
+
+    setEvents(updatedEvents);
     setLoading(false);
+    // 로딩이 끝나면 페이지번호를 1 늘려놓는다.
+    setCurrentPage(prevPage=>prevPage+1);
+    console.log('end loading...')
+    
   };
 
   // 초기 이벤트 1페이지 목록 가져오기
